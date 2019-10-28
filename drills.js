@@ -25,6 +25,29 @@ app.get('/cipher', (req, res) => {
   res.send(output);
 });
 
+app.get('/lotto', (req, res) => {
+  let same=0;
+  let response;
+  req.query.arr.forEach(num => {
+    if(Math.ceil(Math.random()*20)===num) {
+      same++;
+    }
+    console.log(Math.ceil(Math.random()*20))
+  });
+
+  if(same < 4) {
+    response="Sorry, you lose";
+  } else if(same === 4) {
+    response="Congratulations, you win a free ticket"
+  } else if(same===5) {
+    response="Congratulations! You win $100!"
+  } else {
+    response="Wow! Unbelievable! You could have won the mega millions!"
+  }
+  
+  res.send(response);
+});
+
 app.listen(8000, () => {
   console.log('Express server is listening on port 8000!');
 });
